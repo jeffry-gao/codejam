@@ -15,10 +15,10 @@ int solve(string idt,int E, int N, int* Ns)
 	if(debug)
 		cout<<idt<<"[in]E:"<<E<<"; N:"<<N<<"; Ns[0]:"<<Ns[0]<<endl;
 
+	int maxGain=0;
 	if(N==1)
 		return Ns[0]*E;
 	else{
-		int maxGain=0;
 		int maxGainIdx=0;
 		for(int i=0;i<=E;i++){
 		 	int gainNext = solve(idt,min(maxE,E-i+regain),N-1,Ns+1);
@@ -36,7 +36,7 @@ int solve(string idt,int E, int N, int* Ns)
 			cout<<idt<<"[max]Enegy used:"<<maxGainIdx<<"; Gain:"<<maxGain<<endl;
 		
 	}
-	return 0;
+	return maxGain;
 }
 
 void make()
