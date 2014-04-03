@@ -1,9 +1,24 @@
 #include<iostream>
 #include <algorithm>
+#include <stdio.h>
+#include <string.h>
 
 using namespace std;
 
 bool debug=false;
+
+void u1(){
+	char s[]="abcd";
+	int   l=strlen(s);
+    for(int i=0;i<1<<l;i++){
+		cout<<i<<":";
+		for(int j=0;j<l;j++){
+			if(i&(1<<j))
+				cout<<s[j];
+		}
+		cout<<endl;
+	}
+}
 
 int solve(string idt,int E,int R, int N, int* Ns)
 {
@@ -31,6 +46,7 @@ int main(int argc, char** args)
 {
 	if(argc>1)
 		debug=true;
-    make();
+//    make();
+	u1();
 }
 
