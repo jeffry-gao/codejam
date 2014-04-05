@@ -53,19 +53,32 @@ int solve(char* name, int N)
 	cout<<name<<","<<N<<endl;
     char *p1 = name;
     char *p2 = p1;
+	char *p3=NULL, *p4=NULL;
     int status=0;
     while(*p1!=0){
 		while(*p1!=0&&isVow(*p1))p1++;
-		if(*p1==0)return status;
 		if(debug)cout<<"p1:"<<p1-name<<endl;
+		if(*p1==0){
+			if(debug)cout<<"break with *p1==0"<<endl;
+			break;
+		}
 		p2=p1;
 		while(*p2!=0&&!isVow(*p2))p2++;
 		if(debug)cout<<"p2:"<<p2-name<<endl;
-		status += (p1-name)*(p2-p1-N+1);
-		for(int i=p2-p1-N+1;i>0;i--)
-		status += i;
+
 		if(*p2==0)break;
-		else p1=p2;
+		else p3=p2;
+		while(*p3!=0&&isVow(*p3))p3++;
+		if(debug)cout<<"p3:"<<p3-name<<endl;
+		if(*p3==0){
+			if(debug)cout<<"break with *p3==0"<<endl;
+			break;
+		}
+		p4=p3;
+		while(*p4!=0&&!isVow(*p4))p4++;
+		if(debug)cout<<"p4:"<<p4-name<<endl;
+		
+		p1=p4;
     }
 
     return status;
@@ -81,7 +94,7 @@ void make()
         char name[1000000];
         memset(name,0,sizeof(name));
         cin>>name>>N;
-        int r = solveSmall(name,N);
+        int r = solve(name,N);
         cout<<"Case #"<<c<<": "<<r<<endl;
     }
 }
