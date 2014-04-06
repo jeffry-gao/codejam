@@ -66,19 +66,29 @@ int solve(char* name, int N)
 		while(*p2!=0&&!isVow(*p2))p2++;
 		if(debug)cout<<"p2:"<<p2-name<<endl;
 
-		if(*p2==0)break;
-		else p3=p2;
-		while(*p3!=0&&isVow(*p3))p3++;
-		if(debug)cout<<"p3:"<<p3-name<<endl;
-		if(*p3==0){
-			if(debug)cout<<"break with *p3==0"<<endl;
-			break;
+		if(!*p2==0){
+			p3=p2;
+			while(*p3!=0&&isVow(*p3))p3++;
+			if(debug)
+				cout<<"p3:"<<p3-name<<endl;
+			if(*p3==0){
+				if(debug)
+				cout<<"*p3==0"<<endl;
+			}
+			p4=p3;
+			while(*p4!=0&&!isVow(*p4))
+				p4++;
+			if(debug)
+				cout<<"p4:"<<p4-name<<endl;
+			if(p4-p3>N)
+				p4=p3+N;	
+		}else{
+			p4=p2;
 		}
-		p4=p3;
-		while(*p4!=0&&!isVow(*p4))p4++;
-		if(debug)cout<<"p4:"<<p4-name<<endl;
+		if(debug)cout<<"cal("<<p1-home<<","
+							<<p2-home<<","
+							<<p4-home<<endl;
 		
-		p1=p4;
     }
 
     return status;
