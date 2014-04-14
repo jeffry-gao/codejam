@@ -94,20 +94,23 @@ bool isSolvable(int R, int C, int M){
 bool tryRearrange(int R, int C){
 	bool moved=false;
 	for(int i=R-1;i>1;i--){
-		for(int j=0;j<C-2;j++){
+		for(int j=0;j<C;j++){
 			if(mine[i][j]=='.'&&mine[i-1][j+1]=='*'){
 				int j2r=j;
-				while(mine[i-1][j+1]=='*'&&j+1<C)
+				j++;
+				if(debug)cout<<i<<","<<j<<endl;
+				while(mine[i-1][j]=='*'&&j<C)
 					j++;
+				if(debug)cout<<j2r<<","<<j<<endl;
 				if(i==R-2&&j-j2r>2){
 					mine[i][j2r]='*';
-					mine[i-1][j]='.';
+					mine[i-1][j-2]='.';
+					mine[i+1][j2r]='*';
+					mine[i-1][j-1]='.';
 					moved=true;
 					break;
 				} else if(i<R-2){
 					mine[i][j2r]='*';
-					mine[i-1][j]='.';
-					mine[i+1][j2r]='*';
 					mine[i-1][j-1]='.';
 					moved=true;
 					break;
@@ -142,7 +145,7 @@ void solve(int c)
 		if(m==0)break;
 	}
 	
-	print(R,C);
+	if(debug)print(R,C);
 	bool solvable=true;
 	while(!isSolvable(R,C,M)){
 		if(!tryRearrange(R,C)){
